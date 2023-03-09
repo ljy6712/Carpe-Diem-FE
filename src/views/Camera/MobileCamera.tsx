@@ -4,6 +4,10 @@ import * as faceapi from 'face-api.js';
 import * as io from 'socket.io-client';
 import styled, { keyframes } from 'styled-components';
 import { TbLoader } from 'react-icons/tb';
+import { Modal } from '@mui/material';
+import Box from '@mui/material/Box';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 
 import './index.css';
 import Emotion from './Emotion';
@@ -410,10 +414,57 @@ function MobileCamera(props: any) {
         borderRadius: '20px',
         transition: 'all 0.6s ease-in-out',
     };
+    const [open, setOpen] = useState(false);
+    const [bigUsim, setBigUsim] = useState('');
+
+    const handleOpen = (usim: any) => {
+        setBigUsim(usim);
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <>
             <div>
+                <div style={{ position: 'absolute', display: 'flex', alignItems: 'left', top: '30px' }}>
+                    {usim?.map((us: any) => {
+                        return (
+                            // eslint-disable-next-line react/jsx-key
+                            <img
+                                style={{ padding: '7px' }}
+                                width="60px"
+                                height="60px"
+                                src={us}
+                                onClick={() => {
+                                    handleOpen(us);
+                                }}
+                            />
+                        );
+                    })}
+                </div>
+                <Modal open={open} onClose={handleClose}>
+                    <Box
+                        sx={{
+                            top: '50%',
+                            left: '50%',
+                            transform: 'translate(-50%, -50%)',
+                            position: 'absolute',
+                            outline: 'none',
+                            display: 'flex',
+                            flexDirection: 'row',
+                        }}
+                    >
+                        <img src={bigUsim} width="600px" height="600px" style={{ objectFit: 'cover' }} />
+
+                        <Box>
+                            <IconButton type="button" onClick={handleClose}>
+                                <CloseIcon sx={{ color: 'white' }} />
+                            </IconButton>
+                        </Box>
+                    </Box>
+                </Modal>
                 <Link to={`/remote/${userId}`}>
                     {/* <div style={{ marginLeft: '7px', marginTop: '30px', marginBottom: '10px' }}> */}
                     <div style={{ marginLeft: '7px' }}>
