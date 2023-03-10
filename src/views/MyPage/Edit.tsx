@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import { border, color, Container, display, margin, maxHeight, maxWidth } from '@mui/system';
+import { border, color, Container, display, margin, maxHeight, maxWidth, width } from '@mui/system';
 import axios from 'axios';
 import config from '../../config';
 import styled from 'styled-components';
 import { CiEdit } from 'react-icons/ci';
 
-import { Link } from 'react-router-dom';
 import { Button, Card, Box, Paper } from '@mui/material';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faImage } from '@fortawesome/free-regular-svg-icons';
 import Modal from '@mui/material/Modal';
 import ImageUploader from 'react-images-upload';
 
@@ -24,15 +21,13 @@ const Profile = styled.img`
 const Profile2 = styled.img`
     display: flex;
     width: 400px;
-    // height: 150px;
-    // border-radius: 100%;
 `;
 
 const CardBox = styled.div`
     background-position: center;
     background-size: cover;
     width: 100%;
-    height: 400%;
+    height: 100%;
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 1rem 2rem #333;
     text-align: center;
@@ -46,12 +41,13 @@ const Style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '90%',
-    height: 'auto',
+    width: '60%',
+    height: '70%',
     bgcolor: 'background.paper',
     border: '4px solid #000',
     borderRadius: '1rem',
     p: 7,
+    overflow: 'auto',
 };
 
 const Close = styled.div`
@@ -61,7 +57,6 @@ const Close = styled.div`
     font-size: 24px;
     cursor: pointer;
     opacity: 0.5; /* Add opacity to make the icon appear dimly */
-  }
 `;
 
 const Edit = () => {
@@ -98,8 +93,6 @@ const Edit = () => {
             withCredentials: true,
         })
             .then(function (response) {
-                console.log(response.data);
-
                 setUsimInfo(response.data);
                 setOpen((open) => !open);
             })
@@ -114,7 +107,6 @@ const Edit = () => {
         formData.append('imgs', postImages[0]);
         formData.append('imgs', postImages[1]);
         formData.append('imgs', postImages[2]);
-        // console.log('😉', usimInfo[0].img_id);
 
         axios({
             method: 'put',
@@ -136,15 +128,27 @@ const Edit = () => {
     };
 
     const onDrop = (picture: any) => {
-        setPostImages(picture);
-        console.log(picture);
+        let count = 3;
+
+        const filteredPictures = picture.map((p: any) => {
+            // 파일명에서 확장자 추출
+            const extension = p.name.split('.').pop();
+
+            const timestamp = Date.now();
+
+            count += 1;
+
+            // 새로운 파일 객체 생성
+            return new File([p], `${count}_${timestamp}.${extension}`, { type: p.type });
+        });
+        setPostImages(filteredPictures);
     };
 
     const renderUsimInfo = (): JSX.Element[] => {
         return usimInfo.map((id: any) => (
-            <div key={id.img_id} style={{ margin: '10px' }}>
-                <CardBox style={{ height: '280px' }}>
-                    <Profile2 src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${id.userImgUrl}`} alt="profile image" />
+            <div key={id.img_id} style={{ width: '30%' }}>
+                <CardBox style={{ width: '70%', height: '20vh' }}>
+                    <Profile2 src={`https://${config.aws.cdn_name}/${id.userImgUrl}`} alt="profile image" style={{ width: '100%', height: '17vh' }} />
                 </CardBox>
             </div>
         ));
@@ -174,45 +178,41 @@ const Edit = () => {
                                     />
                                 </Typography>
                                 <Modal open={open} onClose={handleClose}>
-                                    <>
-                                        <Box sx={Style}>
-                                            <div
-                                                style={{
-                                                    display: 'flex',
-                                                    justifyContent: 'space-between',
-                                                    flexDirection: 'row',
-                                                    // border: 'solid blue',
-                                                }}
-                                            >
-                                                {open && renderUsimInfo()}
-                                            </div>
-                                            <ImageUploader
-                                                // style={{ maxHeight: '800px', maxWidth: '800px', innerHeight: '1000px', innerWidth: '1000px' }}
-                                                withPreview={true}
-                                                withIcon={false}
-                                                onChange={onDrop}
-                                                label="학습할 3개의 새로운 이미지를 첨부해주세요."
-                                                imgExtension={['.jpg', '.gif', '.png', '.jpeg']}
-                                                maxFileSize={5242880}
-                                                buttonText="사진 업로드하기"
-                                                // withLabel={true}
-                                            />
-                                            <div style={{ textAlign: 'center' }}>
-                                                <Button sx={{ backgroundColor: '#6666CC', marginRight: '10px' }} variant="contained" onClick={editOn}>
-                                                    취소
+                                    <Box sx={Style}>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}
+                                        >
+                                            {open && renderUsimInfo()}
+                                        </div>
+                                        <ImageUploader
+                                            withPreview={true}
+                                            withIcon={false}
+                                            onChange={onDrop}
+                                            label="학습할 3개의 새로운 이미지를 첨부해주세요."
+                                            imgExtension={['.jpg', '.png']}
+                                            maxFileSize={5242880}
+                                            buttonText="새로운 사진 업로드하기"
+                                            style={{ width: '100%' }}
+                                            buttonStyles={{ fontWeight: 'bold' }}
+                                        />
+                                        <div style={{ textAlign: 'center' }}>
+                                            <Button sx={{ backgroundColor: '#6666CC', marginRight: '10px' }} variant="contained" onClick={editOn}>
+                                                취소
+                                            </Button>
+                                            {postImages.length === 3 ? (
+                                                <Button sx={{ backgroundColor: '#6666CC' }} variant="contained" onClick={submitImg}>
+                                                    확인
                                                 </Button>
-                                                {postImages.length === 3 ? (
-                                                    <Button sx={{ backgroundColor: '#6666CC' }} variant="contained" onClick={submitImg}>
-                                                        확인
-                                                    </Button>
-                                                ) : (
-                                                    <Button disabled sx={{ backgroundColor: '#6666CC' }} variant="contained">
-                                                        확인
-                                                    </Button>
-                                                )}
-                                            </div>
-                                        </Box>
-                                    </>
+                                            ) : (
+                                                <Button disabled sx={{ backgroundColor: '#6666CC' }} variant="contained">
+                                                    확인
+                                                </Button>
+                                            )}
+                                        </div>
+                                    </Box>
                                 </Modal>
                             </Grid>
                         </Grid>

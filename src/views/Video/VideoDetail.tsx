@@ -158,8 +158,8 @@ const VideoDetail = () => {
                             controls
                             // autoPlay
                             loop
-                            poster={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${card.thumbnailUrl}`}
-                            src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${card.videoUrl}`}
+                            poster={`https://${config.aws.cdn_name}/${card.thumbnailUrl}`}
+                            src={`https://${config.aws.cdn_name}/${card.videoUrl}`}
                             style={{ zIndex: -1 }}
                         ></VideoStyle>
                     </div>
@@ -167,7 +167,7 @@ const VideoDetail = () => {
                         <IconButton type="button" onClick={() => history.go(-1)}>
                             <CloseIcon sx={{ color: 'white' }} />
                         </IconButton>
-                        <a href={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${card.videoUrl}`} download>
+                        <a href={`https://${config.aws.cdn_name}/${card.videoUrl}`} download>
                             <IconButton>
                                 <FontAwesomeIcon
                                     icon={faCircleDown}

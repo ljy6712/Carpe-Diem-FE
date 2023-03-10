@@ -120,12 +120,7 @@ function Main() {
         <>
             <Header dark={true} />
             <StyleMain>
-                <MainVideo
-                    src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/assets/main-video.mp4`}
-                    autoPlay
-                    loop
-                    muted
-                />
+                <MainVideo src={`https://${config.aws.cdn_name}/assets/main-video.mp4`} autoPlay loop muted />
                 <Mask src={`${process.env.PUBLIC_URL}/imgs/mask.jpg`} alt="" />
                 <Title>CarpeDiem</Title>
             </StyleMain>

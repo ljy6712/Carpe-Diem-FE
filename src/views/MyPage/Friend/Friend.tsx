@@ -60,7 +60,6 @@ const inputSx = {
     },
 };
 
-const friend: friendData = { user_id: '2312314', nickname: '수개미', email: 'test@gamil.com', profile_img: '' };
 const Friend = () => {
     const navigate = useNavigate();
     const [friendList, setFriendList] = useState([]);
@@ -81,7 +80,6 @@ const Friend = () => {
     }, []);
 
     const onLibrary = (friendEmail: string) => {
-        console.log(friendEmail);
         axios({
             method: 'get',
             url: `/friend/${friendEmail}`,
@@ -97,14 +95,12 @@ const Friend = () => {
     };
 
     const onDel = (friendEmail: string) => {
-        console.log(friendEmail);
         axios({
             method: 'delete',
             url: `/friend/${friendEmail}`,
             withCredentials: true,
         })
             .then(function (response: any) {
-                console.log(response.status);
                 history.go(0);
             })
             .catch(function (error: any) {

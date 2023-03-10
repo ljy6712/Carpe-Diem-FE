@@ -48,7 +48,7 @@ const Book = (props: any) => {
             <img
                 className="image"
                 style={{ width: '100%', height: '250px', objectFit: 'cover' }}
-                src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${props.album.coverImgUrl}`}
+                src={`https://${config.aws.cdn_name}/${props.album.coverImgUrl}`}
             />
             <div className="title">
                 <Typography sx={{ align: 'center' }}>{dayjs(props.album.createdAt).tz('utc').format('YYYY년 MM월 DD일')}</Typography>

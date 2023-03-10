@@ -79,7 +79,7 @@ const SingleAlbum = () => {
                 <SwiperSlide>
                     <div>
                         <img
-                            src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${album.coverImgUrl}`}
+                            src={`https://${config.aws.cdn_name}/${album.coverImgUrl}`}
                             style={{
                                 margin: '70px auto',
                                 height: '15rem',

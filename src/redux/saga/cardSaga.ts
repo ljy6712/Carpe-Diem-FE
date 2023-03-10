@@ -51,11 +51,8 @@ function* watchCardListLoad() {
 const cardLoadAPI: any = (data: any) => {
     return axios({
         method: 'get',
-        url: `/card/${data.offset}`,
+        url: `/card/${data}`,
         withCredentials: true,
-        params: {
-            option: data.option,
-        },
     });
 };
 

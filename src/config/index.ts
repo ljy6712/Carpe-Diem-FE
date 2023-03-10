@@ -9,6 +9,7 @@ export default {
         port: process.env.REACT_APP_BASIC_SERVER_PORT,
     },
     aws: {
+        cdn_name: process.env.REACT_APP_BASIC_AWS_CDN_NAME,
         bucket_name: process.env.REACT_APP_BASIC_AWS_BUCKET_NAME,
         region: process.env.REACT_APP_BASIC_AWS_REGION,
     },

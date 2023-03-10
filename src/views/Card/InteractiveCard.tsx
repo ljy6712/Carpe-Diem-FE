@@ -54,11 +54,7 @@ export default function InteractiveCard(properties: any) {
             }}
         >
             <AspectRatio ratio="1" sx={{ width: 90 }}>
-                <img
-                    src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${properties.properties.thumbnailUrl}`}
-                    loading="lazy"
-                    alt=""
-                />
+                <img src={`https://${config.aws.cdn_name}/${properties.properties.thumbnailUrl}`} loading="lazy" alt="" />
             </AspectRatio>
             <div>
                 <Typography level="h2" fontSize="lg" id="card-description" mb={0.5}>

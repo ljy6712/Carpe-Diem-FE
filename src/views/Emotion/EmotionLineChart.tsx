@@ -33,12 +33,12 @@ const EmotionLineChart = (props: any) => {
                         <YAxis tick={{ fill: 'white' }} tickCount={4} allowDecimals={false} />
                         <Tooltip />
                         <Legend wrapperStyle={{ margin: '-2rem 1rem' }} />
-                        <Line type="monotone" dataKey="행복해요" stroke="#fdba74" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="슬퍼요" stroke="#67e8f9" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="놀라워요" stroke="#fde047" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="힘들어요" stroke="#86efac" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="화나요" stroke="#fda4af" activeDot={{ r: 8 }} />
-                        <Line type="monotone" dataKey="무서워요" stroke="#d8b4fe" activeDot={{ r: 8 }} />
+                        <Line type="monotone" dataKey="행복해요" stroke="#fdba74" activeDot={{ r: 8 }} strokeWidth={5} />
+                        <Line type="monotone" dataKey="슬퍼요" stroke="#67e8f9" activeDot={{ r: 8 }} strokeWidth={5} />
+                        <Line type="monotone" dataKey="놀라워요" stroke="#fde047" activeDot={{ r: 8 }} strokeWidth={5} />
+                        <Line type="monotone" dataKey="힘들어요" stroke="#86efac" activeDot={{ r: 8 }} strokeWidth={5} />
+                        <Line type="monotone" dataKey="화나요" stroke="#fda4af" activeDot={{ r: 8 }} strokeWidth={5} />
+                        <Line type="monotone" dataKey="무서워요" stroke="#d8b4fe" activeDot={{ r: 8 }} strokeWidth={5} />
                     </LineChart>
                 </ResponsiveContainer>
             </CardBox>

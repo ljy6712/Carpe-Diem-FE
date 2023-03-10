@@ -151,7 +151,7 @@ export default function CamContent() {
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         borderRadius: '6px',
-                        marginTop: '110px',
+                        marginTop: '145px',
                         marginLeft: '30px',
                         textAlign: 'center',
                         boxShadow: '0 1rem 2rem rgba(0, 0, 0, 1)',

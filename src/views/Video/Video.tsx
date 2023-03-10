@@ -207,7 +207,7 @@ const Video = () => {
                                                     >
                                                         <div style={{ marginBottom: '10px' }}>
                                                             <img
-                                                                src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${list.thumbnailUrl}`}
+                                                                src={`https://${config.aws.cdn_name}/${list.thumbnailUrl}`}
                                                                 style={{
                                                                     width: '170px',
                                                                     height: '120px',
@@ -347,16 +347,8 @@ const Video = () => {
                                     }}
                                 >
                                     <CardCover>
-                                        <video
-                                            id={String(card.cardId)}
-                                            loop
-                                            muted
-                                            poster={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${card.thumbnailUrl}`}
-                                        >
-                                            <source
-                                                src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${card.videoUrl}`}
-                                                type="video/webm"
-                                            />
+                                        <video id={String(card.cardId)} loop muted poster={`https://${config.aws.cdn_name}/${card.thumbnailUrl}`}>
+                                            <source src={`https://${config.aws.cdn_name}/${card.videoUrl}`} type="video/webm" />
                                         </video>
                                     </CardCover>
                                     <CardCover

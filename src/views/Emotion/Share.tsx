@@ -140,7 +140,7 @@ const Share = (props: any) => {
     const sendMail = () => {
         console.log('onCapture');
         html2canvas(document.getElementById('chart') as HTMLElement)?.then((canvas) => {
-            const imgData = canvas.toDataURL('image/jpeg', 0.3);
+            const imgData = canvas.toDataURL('image/jpeg', 0.1);
             axios({
                 method: 'post',
                 url: `/mail`,

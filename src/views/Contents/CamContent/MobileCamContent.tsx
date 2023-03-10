@@ -104,10 +104,10 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 export default function MobileCamContent() {
     const dispatch = useDispatch();
     const { usim } = useSelector((state: any) => state.usim);
+    const { userId } = useSelector((state: any) => state.auth);
     const [videoList, setVideoList] = useState<any[]>([]);
     const [alertClosed, setAlertClosed] = useState<any>('inline-block');
     const [switchChecked, setSwitchChecked] = useState<any>(false);
-    let getUserId = '';
 
     useEffect(() => {
         dispatch({
@@ -129,7 +129,6 @@ export default function MobileCamContent() {
                 setVideoList(new Array(result.data));
 
                 console.log('최근 24시간 내 저장된 영상 데이터 로드 성공');
-                getUserId = result.data[0].userId;
             })
             .catch((err) => {
                 console.log(err);
@@ -152,13 +151,13 @@ export default function MobileCamContent() {
                 <div
                     style={{
                         width: '500px',
-                        height: '900px',
+                        height: '927px',
                         paddingTop: '100px',
                         backgroundImage: `url('${process.env.PUBLIC_URL}/imgs/browser-frame.png')`,
                         backgroundRepeat: 'no-repeat',
                         backgroundSize: 'cover',
                         borderRadius: '6px',
-                        marginTop: '135px',
+                        marginTop: '125px',
                         marginLeft: '80px',
                         textAlign: 'center',
                     }}
@@ -166,7 +165,7 @@ export default function MobileCamContent() {
                     <Alert severity="info" sx={{ margin: '10px' }}>
                         모바일 원격 캠에 접속하시려면 QR을 찍어보세요
                     </Alert>
-                    <QRCodeSVG style={{ paddingBottom: '12px' }} value={`${config.server.protocol}://${config.client.host}/remote/${getUserId}`} />
+                    <QRCodeSVG style={{ paddingBottom: '12px' }} value={`${config.server.protocol}://${config.client.host}/remote/${userId}`} />
                     <hr />
                     <h4 style={{ color: 'black', marginTop: '13px' }}>
                         {' '}

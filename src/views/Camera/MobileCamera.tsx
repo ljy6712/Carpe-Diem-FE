@@ -234,9 +234,15 @@ function MobileCamera(props: any) {
     const loadImage = async () => {
         return Promise.all(
             usim.map(async (label: string) => {
-                const images = await faceapi.fetchImage(label);
+                const response = await fetch(label);
+
+                if (!response.ok) throw new Error(`Failed to fetch image ${label}`);
+
+                const blob = await response.blob();
+                const images = await faceapi.bufferToImage(blob);
                 const descriptions = [];
                 const detections = await faceapi.detectSingleFace(images).withFaceLandmarks().withFaceDescriptor();
+
                 if (detections) descriptions.push(detections.descriptor);
 
                 return new faceapi.LabeledFaceDescriptors(label, descriptions);
@@ -321,9 +327,7 @@ function MobileCamera(props: any) {
         const loop = async () => {
             const expressions = await faceDetecting(expression);
             // 새로 녹화 시작
-            // CHECK
-            if (!recordFlag && expressions.value > constraints.model.emotionValue && expressions.label === 'happy') {
-                // if (!recordFlag && expressions.value > constraints.model.emotionValue && expressions.label === 'happy' && expressions.target === userId) {
+            if (!recordFlag && expressions.value > constraints.model.emotionValue && expressions.target !== 'unknown') {
                 recordFlag = true;
                 recordInfo = {
                     maxValue: expressions.value,

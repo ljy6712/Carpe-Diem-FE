@@ -319,7 +319,7 @@ const handleClickc = () => {
                                                     <Card>
                                                         <div style={{ marginLeft: '10px', marginBottom: '10px' }}>
                                                             <img
-                                                                src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${checkedListAlbum[list].thumbnailUrl}`}
+                                                                src={`https://${config.aws.cdn_name}/${checkedListAlbum[list].thumbnailUrl}`}
                                                                 style={{
                                                                     width: '170px',
                                                                     height: '120px',
@@ -433,16 +433,8 @@ const handleClickc = () => {
                                             {/* <video id={String(card)} loop poster="https://source.unsplash.com/random">
                                             <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4" />
                                         </video> */}
-                                            <video
-                                                id={String(card.cardId)}
-                                                loop
-                                                muted
-                                                poster={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${card.thumbnailUrl}`}
-                                            >
-                                                <source
-                                                    src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${card.videoUrl}`}
-                                                    type="video/webm"
-                                                />
+                                            <video id={String(card.cardId)} loop muted poster={`https://${config.aws.cdn_name}/${card.thumbnailUrl}`}>
+                                                <source src={`https://${config.aws.cdn_name}/${card.videoUrl}`} type="video/webm" />
                                             </video>
                                         </CardCover>
                                         <CardCover

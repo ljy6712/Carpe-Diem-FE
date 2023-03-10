@@ -98,7 +98,7 @@ function* usimLoading(action: any): any {
         const result = yield call(usimLoadingAPI, action.payload);
         const usimData: string[] = [];
         Object.values(result.data).map((value: any) => {
-            usimData.push(`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${value.userImgUrl}`);
+            usimData.push(`https://${config.aws.cdn_name}/${value.userImgUrl}`);
         });
 
         yield put({

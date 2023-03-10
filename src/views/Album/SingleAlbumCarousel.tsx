@@ -113,13 +113,7 @@ export default function AlbumCarousel(props: any) {
                 {dayjs(props.cardInfo.createdAt).tz('utc').format('YYYY년 MM월 DD일')}
             </h3>
             <div>
-                <video
-                    controls
-                    loop
-                    src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${props.cardInfo.videoUrl}`}
-                    width="500px"
-                    height="380px"
-                ></video>
+                <video controls loop src={`https://${config.aws.cdn_name}/${props.cardInfo.videoUrl}`} width="500px" height="380px"></video>
             </div>
             <div style={{ fontSize: '20px', textAlign: 'center', marginTop: '4px', display: 'flex', justifyContent: 'center' }}>
                 <span style={{ marginRight: '10px' }}>

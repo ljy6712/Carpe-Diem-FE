@@ -230,7 +230,6 @@ export function UserSearch() {
             }
         }
     };
-    console.log(inform);
 
     return (
         <>

@@ -164,13 +164,7 @@ const AlbumSinglePage = () => {
             <div>
                 <h1>My video</h1>
                 <div>
-                    <video
-                        controls
-                        loop
-                        src={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${cardAlbum.videoUrl}`}
-                        width="600px"
-                        height="460px"
-                    ></video>
+                    <video controls loop src={`https://${config.aws.cdn_name}/${cardAlbum.videoUrl}`} width="600px" height="460px"></video>
                 </div>
                 <div>
                     <div
@@ -218,7 +212,7 @@ const AlbumSinglePage = () => {
                         >
                             <FontAwesomeIcon icon={faTrashAlt} size="lg" style={{ color: '#1d1d1d' }} />
                         </button>
-                        <a href={`https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${cardAlbum.videoUrl}`} download>
+                        <a href={`https://${config.aws.cdn_name}/${cardAlbum.videoUrl}`} download>
                             <button
                                 style={{
                                     outline: 'none',

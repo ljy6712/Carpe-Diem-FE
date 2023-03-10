@@ -104,8 +104,8 @@ const Share = (props: any) => {
                 objectType: 'feed',
                 content: {
                     title: '내 추억 구경할래?',
-                    description: props.comment, 
-                    imageUrl: `https://${config.aws.bucket_name}.s3.${config.aws.region}.amazonaws.com/${props.img}`,
+                    description: props.comment,
+                    imageUrl: `https://${config.aws.cdn_name}/${props.img}`,
                     link: {
                         mobileWebUrl: url,
                         webUrl: url,
