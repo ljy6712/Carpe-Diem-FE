@@ -1,7 +1,7 @@
 export default {
     model: {
         matchValue: 0.45,
-        emotionValue: 0.8,
+        emotionValue: 0.98,
     },
     video: {
         width: 800,

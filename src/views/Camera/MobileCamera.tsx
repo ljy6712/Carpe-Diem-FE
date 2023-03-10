@@ -360,26 +360,26 @@ function MobileCamera(props: any) {
 
     const recordVideo = async (mediaRecorder: MediaRecorder) => {
         setTimeout(async () => {
-            if (recordInfo.count <= 5 && Date.now() - recentRecordTime < 2000) {
-                // 2초 이내 감정 갱신시, 시간 추가
-                console.log('녹화 연장');
-                recordInfo.count++; // 시간 연장 횟수 (최대 1분까지만 저장되게 구현)
-                recordVideo(mediaRecorder);
-            } else {
-                try {
-                    if (mobileRef.current) {
-                        mediaRecorder.stop();
-                        props.onVideoListRender(new Date());
-                    }
-                    recordFlag = false;
-                    recentRecordTime = 0;
-                    console.log('녹화 중지');
-                    setRecordStarted(false);
-                } catch (err) {
-                    console.log(err);
+            // if (recordInfo.count <= 5 && Date.now() - recentRecordTime < 2000) {
+            //     // 2초 이내 감정 갱신시, 시간 추가
+            //     console.log('녹화 연장');
+            //     recordInfo.count++; // 시간 연장 횟수 (최대 1분까지만 저장되게 구현)
+            //     recordVideo(mediaRecorder);
+            // } else {
+            try {
+                if (mobileRef.current) {
+                    mediaRecorder.stop();
+                    props.onVideoListRender(new Date());
                 }
+                recordFlag = false;
+                recentRecordTime = 0;
+                console.log('녹화 중지');
+                setRecordStarted(false);
+            } catch (err) {
+                console.log(err);
             }
-        }, 15000);
+            // }
+        }, 10000);
     };
 
     async function handleDataAvailable(event: any) {

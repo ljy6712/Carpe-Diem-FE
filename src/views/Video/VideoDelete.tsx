@@ -35,7 +35,6 @@ const VideoDelete = (props: any) => {
                 card_id: props.cardId,
             },
         });
-        navigate('/video');
     };
     return (
         <>
@@ -51,7 +50,16 @@ const VideoDelete = (props: any) => {
                         영상이 영구적으로 삭제됩니다.
                     </Typography>
                     <Typography align="right">
-                        <Button onClick={onClickDelete}>확인</Button>
+                        <Button
+                            onClick={() => {
+                                onClickDelete();
+                                setTimeout(() => {
+                                    window.location.replace('/video');
+                                }, 800);
+                            }}
+                        >
+                            확인
+                        </Button>
                         <Button onClick={handleClose}>취소</Button>
                     </Typography>
                 </Box>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ALBUM_DELETE_REQUEST } from '../../redux/types';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Modal from '@mui/material/Modal';
 import { Box } from '@mui/system';
@@ -19,6 +20,7 @@ const style = {
 
 export default function AlbumDelete(props: any) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -30,7 +32,6 @@ export default function AlbumDelete(props: any) {
                 album_id: props.albumId,
             },
         });
-        window.location.replace('/album');
     };
     return (
         <>
@@ -45,7 +46,16 @@ export default function AlbumDelete(props: any) {
                         앨범이 삭제됩니다.
                     </Typography>
                     <Typography align="right">
-                        <Button onClick={onClickDelete}>확인</Button>
+                        <Button
+                            onClick={() => {
+                                onClickDelete();
+                                setTimeout(() => {
+                                    window.location.replace('/album');
+                                }, 800);
+                            }}
+                        >
+                            확인
+                        </Button>
                         <Button onClick={handleClose}>취소</Button>
                     </Typography>
                 </Box>

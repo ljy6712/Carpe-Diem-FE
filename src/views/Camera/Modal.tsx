@@ -82,7 +82,7 @@ const Modal = () => {
 
         setTimeout(() => {
             history.go(0);
-        }, 500);
+        }, 800);
     };
     return (
         <React.Fragment>

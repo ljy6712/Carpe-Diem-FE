@@ -205,7 +205,7 @@ export default function MobileCamera() {
                 >
                     모바일 원격 캠
                 </h2>
-                <video ref={videoRef} autoPlay muted width="500px" />
+                <video ref={videoRef} autoPlay muted width="250px" />
                 {/* <video ref={videoRef} autoPlay muted width={constraints.video.width} height={constraints.video.height} /> */}
             </div>
             <span>

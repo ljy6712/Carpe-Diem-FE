@@ -6,9 +6,6 @@ import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import Typography from '@mui/joy/Typography';
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-
 const Div = styled('div')`
     position: relative;
     margin: auto;
@@ -51,7 +48,8 @@ const Book = (props: any) => {
                 src={`https://${config.aws.cdn_name}/${props.album.coverImgUrl}`}
             />
             <div className="title">
-                <Typography sx={{ align: 'center' }}>{dayjs(props.album.createdAt).tz('utc').format('YYYY년 MM월 DD일')}</Typography>
+                <>{console.log(props.album)}</>
+                <Typography sx={{ align: 'center' }}>{dayjs(props.album.createdAt).format('YYYY년 MM월 DD일')}</Typography>
                 <Typography>{props.album.title}</Typography>
             </div>
         </Div>

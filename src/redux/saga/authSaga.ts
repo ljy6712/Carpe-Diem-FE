@@ -38,6 +38,7 @@ function* userLoading(action: any): any {
         });
         console.log('유저 로딩');
     } catch (e: any) {
+        console.log(e);
         console.log('유저 로딩 실패');
         yield put({
             type: USER_LOADING_FAILURE,

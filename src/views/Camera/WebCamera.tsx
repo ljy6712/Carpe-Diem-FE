@@ -222,7 +222,7 @@ function WebCamera(props: any) {
                     console.log(err);
                 }
             }
-        }, 15000);
+        }, 10000);
     };
 
     async function handleDataAvailable(event: any) {
@@ -249,17 +249,25 @@ function WebCamera(props: any) {
     };
 
     const offairButton = {
-        backgroundColor: 'black',
-        color: 'white',
-        textDecoration: 'none',
-        marginBottom: 40,
-        fontWeight: 'bold',
-        border: '2px solid grey',
-        boxShadow: '4px 4px 4px rgba(0, 0, 0, 0.5), -4px -4px 4px rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'transparent',
+        color: 'transparent',
+        textDecoration: 'transparente',
+        borderColor: 'transparent',
+        marginBottom: 55,
+        visibility: 'hidden',
         padding: '8px 16px',
-        fontSize: '24px',
-        borderRadius: '20px',
-        transition: 'all 0.6s ease-in-out',
+        //기존
+        // backgroundColor: 'black',
+        // color: 'white',
+        // textDecoration: 'none',
+        // marginBottom: 40,
+        // fontWeight: 'bold',
+        // border: '2px solid grey',
+        // boxShadow: '4px 4px 4px rgba(0, 0, 0, 0.5), -4px -4px 4px rgba(255, 255, 255, 0.5)',
+        // padding: '8px 16px',
+        // fontSize: '24px',
+        // borderRadius: '20px',
+        // transition: 'all 0.6s ease-in-out',
     };
 
     const [open, setOpen] = useState(false);
@@ -314,7 +322,7 @@ function WebCamera(props: any) {
                                 </Box>
                             </Box>
                         </Modal>
-                        {recordStarted ? (
+                        {recordStarted && camStarted ? (
                             <button style={onairButton}>ON AIR</button>
                         ) : (
                             <button style={{ ...offairButton, visibility: 'hidden' }}>ON AIR</button>
